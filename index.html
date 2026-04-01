@@ -5,8 +5,7 @@
   <title>Auren</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -15,121 +14,248 @@
       padding: 0;
     }
 
+    :root {
+      --bg1: #8ec5fc;
+      --bg2: #e0c3fc;
+      --bg3: #f9c5d1;
+      --card: rgba(255, 255, 255, 0.22);
+      --card-border: rgba(255, 255, 255, 0.35);
+      --text-main: #ffffff;
+      --text-soft: rgba(255, 255, 255, 0.92);
+      --shadow: rgba(91, 61, 145, 0.22);
+      --play: #34a853;
+      --samsung: #1428a0;
+      --privacy: rgba(255, 255, 255, 0.22);
+      --privacy-hover: rgba(255, 255, 255, 0.32);
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      color: white;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 24px;
       overflow: hidden;
-      background: radial-gradient(circle at 20% 30%, #1a1a40, #0d0d1f 70%);
+      font-family: "Poppins", sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.35) 0, transparent 22%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.18) 0, transparent 18%),
+        radial-gradient(circle at 75% 80%, rgba(255,255,255,0.15) 0, transparent 20%),
+        linear-gradient(135deg, var(--bg1), var(--bg2) 55%, var(--bg3));
     }
 
-    /* 🌌 Animated stars */
-    body::before {
+    /* soft stars / sparkles */
+    body::before,
+    body::after {
       content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
-      animation: moveStars 100s linear infinite;
-      opacity: 0.3;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
     }
 
-    @keyframes moveStars {
-      from { transform: translate(0, 0); }
-      to { transform: translate(-500px, -500px); }
+    body::before {
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.8), transparent 60%),
+        radial-gradient(2px 2px at 80% 20%, rgba(255,255,255,0.75), transparent 60%),
+        radial-gradient(1.5px 1.5px at 70% 70%, rgba(255,255,255,0.7), transparent 60%),
+        radial-gradient(2px 2px at 35% 80%, rgba(255,255,255,0.65), transparent 60%),
+        radial-gradient(1.5px 1.5px at 55% 45%, rgba(255,255,255,0.65), transparent 60%);
+      animation: twinkle 6s ease-in-out infinite alternate;
+      opacity: 0.8;
     }
 
-    /* ✨ Glass card */
+    body::after {
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.12), transparent 55%);
+      filter: blur(25px);
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.45; transform: scale(1); }
+      to   { opacity: 0.95; transform: scale(1.02); }
+    }
+
     .card {
       position: relative;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(15px);
-      padding: 50px 35px;
-      border-radius: 20px;
-      max-width: 520px;
       width: 100%;
+      max-width: 620px;
+      padding: 42px 34px;
       text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.15);
-      animation: fadeIn 1.2s ease;
+      border-radius: 28px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow:
+        0 20px 60px var(--shadow),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+      animation: floatIn 0.9s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .logo-glow {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow: 0 8px 30px rgba(255,255,255,0.16);
     }
 
     h1 {
-      font-size: 2.8em;
+      font-size: clamp(2.3rem, 4vw, 3.2rem);
       font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 15px;
+      letter-spacing: 0.4px;
+      margin-bottom: 12px;
     }
 
-    p {
-      font-size: 1.05em;
-      line-height: 1.7;
-      opacity: 0.9;
+    .subtitle {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--text-soft);
+      max-width: 500px;
+      margin: 0 auto;
     }
 
-    /* 🌟 Button */
-    a {
-      display: inline-block;
+    .store-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
       margin-top: 30px;
-      padding: 14px 30px;
-      background: linear-gradient(135deg, #7f5af0, #2cb67d);
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 20px rgba(127, 90, 240, 0.5);
     }
 
-    a:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 10px 30px rgba(127, 90, 240, 0.7);
+    .store-btn {
+      min-width: 220px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 22px;
+      border-radius: 18px;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      font-size: 0.98rem;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.16);
+    }
+
+    .store-btn:hover {
+      transform: translateY(-3px);
+      opacity: 0.96;
+    }
+
+    .playstore {
+      background: linear-gradient(135deg, #34a853, #66d17a);
+    }
+
+    .galaxystore {
+      background: linear-gradient(135deg, #1428a0, #4d68ff);
+    }
+
+    .store-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .actions {
+      margin-top: 18px;
+    }
+
+    .privacy-link {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: white;
+      background: var(--privacy);
+      border: 1px solid rgba(255,255,255,0.28);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .privacy-link:hover {
+      background: var(--privacy-hover);
+      transform: translateY(-2px);
     }
 
     footer {
-      margin-top: 25px;
-      font-size: 0.85em;
-      opacity: 0.6;
+      margin-top: 24px;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.82);
     }
 
-    /* 📱 Mobile tweaks */
-    @media (max-width: 500px) {
+    @media (max-width: 560px) {
       .card {
-        padding: 35px 25px;
+        padding: 34px 22px;
+        border-radius: 22px;
       }
 
-      h1 {
-        font-size: 2.2em;
+      .store-btn {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .subtitle {
+        font-size: 1rem;
       }
     }
-
   </style>
 </head>
-
 <body>
-
   <div class="card">
+    <div class="logo-glow">A</div>
+
     <h1>Auren</h1>
 
-    <p>
+    <p class="subtitle">
       Welcome to the official page of <strong>Auren</strong>.<br>
-      We craft simple, useful, and delightful mobile experiences.
+      We create simple, useful, and joyful mobile app experiences.
     </p>
 
-    <a href="privacy-policy.html">Privacy Policy</a>
+    <div class="store-buttons">
+      <!-- Replace # with your real Google Play developer/apps page -->
+      <a class="store-btn playstore" href="#" target="_blank" rel="noopener noreferrer">
+        <svg class="store-icon" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M325.3 234.3L104.5 13.5c-8.4 4.4-13.5 12.6-13.5 22.8v439.4c0 10.1 5.1 18.4 13.5 22.8l220.8-220.8z" fill="white" fill-opacity="0.92"/>
+          <path d="M404.6 313.6l-79.3-79.3-78.8 78.8 78.8 78.8 79.3-43.9c21.2-11.8 21.2-34.6 0-46.4z" fill="white"/>
+          <path d="M404.6 164l-79.3-43.9-78.8 78.8 78.8 78.8 79.3-79.3c21.2-11.8 21.2-34.6 0-46.4z" fill="white" fill-opacity="0.95"/>
+        </svg>
+        Google Play
+      </a>
 
-    <footer>
-      © 2026 Auren
-    </footer>
+      <!-- Replace # with your real Samsung Galaxy Store page -->
+      <a class="store-btn galaxystore" href="#" target="_blank" rel="noopener noreferrer">
+        <svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 7.5C6 6.12 7.12 5 8.5 5h7C16.88 5 18 6.12 18 7.5V18a1 1 0 0 1-1.6.8L12 15.5l-4.4 3.3A1 1 0 0 1 6 18V7.5Z" fill="white"/>
+          <path d="M9 5V4.5A2.5 2.5 0 0 1 11.5 2h1A2.5 2.5 0 0 1 15 4.5V5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        Galaxy Store
+      </a>
+    </div>
+
+    <div class="actions">
+      <a class="privacy-link" href="privacy-policy.html">Privacy Policy</a>
+    </div>
+
+    <footer>© 2026 Auren</footer>
   </div>
-
 </body>
 </html>
