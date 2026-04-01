@@ -5,7 +5,7 @@
   <title>Auren</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -15,24 +15,16 @@
     }
 
     :root {
-      --bg1: #5b6ee1;
-      --bg2: #6d4cb3;
-      --bg3: #8b5cf6;
-      --bg4: #2b1f56;
-
-      --card-bg: rgba(14, 12, 35, 0.34);
+      --bg1: #667eea;
+      --bg2: #764ba2;
+      --bg3: #8a63d2;
+      --card-bg: rgba(12, 10, 28, 0.24);
       --card-border: rgba(255, 255, 255, 0.14);
-      --card-highlight: rgba(255, 255, 255, 0.08);
-
       --text-main: #ffffff;
-      --text-soft: rgba(255, 255, 255, 0.86);
-      --text-faint: rgba(255, 255, 255, 0.68);
-
+      --text-soft: rgba(255, 255, 255, 0.9);
       --button-bg: rgba(255, 255, 255, 0.96);
       --button-text: #5a4fcf;
-
-      --shadow-deep: rgba(0, 0, 0, 0.42);
-      --shadow-soft: rgba(112, 83, 197, 0.24);
+      --shadow: rgba(0, 0, 0, 0.32);
     }
 
     body {
@@ -40,27 +32,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 20px;
       overflow: hidden;
       position: relative;
       font-family: "Poppins", Arial, Helvetica, sans-serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.12), transparent 18%),
-        radial-gradient(circle at 80% 18%, rgba(173,216,255,0.10), transparent 20%),
-        radial-gradient(circle at 72% 80%, rgba(255,255,255,0.08), transparent 24%),
-        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
-      background-size: 220% 220%;
-      animation: gradientShift 18s ease infinite;
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.12) 0, transparent 20%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.07) 0, transparent 18%),
+        radial-gradient(circle at 75% 80%, rgba(255,255,255,0.06) 0, transparent 22%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      background-size: 180% 180%;
+      animation: gradientMove 14s ease infinite;
     }
 
-    @keyframes gradientShift {
+    @keyframes gradientMove {
       0%   { background-position: 0% 50%; }
       50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* ambient light */
     body::before,
     body::after {
       content: "";
@@ -70,24 +61,20 @@
     }
 
     body::before {
-      background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 42%),
-        radial-gradient(circle at 30% 75%, rgba(170,130,255,0.08), transparent 24%),
-        radial-gradient(circle at 75% 25%, rgba(120,170,255,0.08), transparent 28%);
-      filter: blur(30px);
+      background-image:
+        radial-gradient(2px 2px at 12% 25%, rgba(255,255,255,0.78), transparent 60%),
+        radial-gradient(1.8px 1.8px at 28% 68%, rgba(255,255,255,0.62), transparent 60%),
+        radial-gradient(2px 2px at 82% 22%, rgba(255,255,255,0.72), transparent 60%),
+        radial-gradient(1.5px 1.5px at 73% 72%, rgba(255,255,255,0.56), transparent 60%),
+        radial-gradient(2px 2px at 55% 40%, rgba(255,255,255,0.48), transparent 60%),
+        radial-gradient(1.5px 1.5px at 40% 84%, rgba(255,255,255,0.5), transparent 60%);
+      opacity: 0.8;
+      animation: twinkle 5s ease-in-out infinite alternate;
     }
 
     body::after {
-      background-image:
-        radial-gradient(2px 2px at 12% 24%, rgba(255,255,255,0.72), transparent 60%),
-        radial-gradient(1.8px 1.8px at 27% 68%, rgba(255,255,255,0.60), transparent 60%),
-        radial-gradient(2px 2px at 81% 21%, rgba(255,255,255,0.66), transparent 60%),
-        radial-gradient(1.6px 1.6px at 73% 72%, rgba(255,255,255,0.58), transparent 60%),
-        radial-gradient(2px 2px at 56% 39%, rgba(255,255,255,0.48), transparent 60%),
-        radial-gradient(1.5px 1.5px at 39% 84%, rgba(255,255,255,0.52), transparent 60%),
-        radial-gradient(1.6px 1.6px at 65% 14%, rgba(255,255,255,0.48), transparent 60%);
-      opacity: 0.9;
-      animation: twinkle 6s ease-in-out infinite alternate;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.07), transparent 60%);
+      filter: blur(26px);
     }
 
     @keyframes twinkle {
@@ -96,68 +83,61 @@
         transform: scale(1);
       }
       to {
-        opacity: 0.95;
-        transform: scale(1.015);
+        opacity: 0.92;
+        transform: scale(1.02);
       }
     }
 
     .shooting-stars {
       position: fixed;
       inset: 0;
-      overflow: hidden;
       pointer-events: none;
+      overflow: hidden;
       z-index: 0;
     }
 
     .shooting-stars span {
       position: absolute;
-      top: -15%;
+      top: -12%;
       width: 2px;
-      height: 110px;
+      height: 90px;
+      background: linear-gradient(-45deg, rgba(255,255,255,0.95), rgba(255,255,255,0));
       border-radius: 999px;
-      background: linear-gradient(-45deg, rgba(255,255,255,0.96), rgba(255,255,255,0));
       filter: blur(0.4px);
       opacity: 0;
-      animation: shootingStar 8.5s linear infinite;
+      animation: shooting 8s linear infinite;
     }
 
     .shooting-stars span:nth-child(1) {
-      left: 16%;
+      left: 18%;
       animation-delay: 0s;
-      height: 90px;
     }
 
     .shooting-stars span:nth-child(2) {
-      left: 46%;
-      animation-delay: 2.4s;
-      height: 120px;
+      left: 52%;
+      animation-delay: 2.8s;
+      height: 75px;
     }
 
     .shooting-stars span:nth-child(3) {
-      left: 72%;
-      animation-delay: 5.1s;
+      left: 78%;
+      animation-delay: 5.2s;
       height: 100px;
     }
 
-    .shooting-stars span:nth-child(4) {
-      left: 88%;
-      animation-delay: 6.8s;
-      height: 80px;
-    }
-
-    @keyframes shootingStar {
+    @keyframes shooting {
       0% {
-        transform: translate3d(0, 0, 0) rotate(45deg);
+        transform: translateY(0) translateX(0) rotate(45deg);
         opacity: 0;
       }
       8% {
         opacity: 1;
       }
-      28% {
+      30% {
         opacity: 1;
       }
-      65% {
-        transform: translate3d(-360px, 700px, 0) rotate(45deg);
+      68% {
+        transform: translateY(620px) translateX(-320px) rotate(45deg);
         opacity: 0;
       }
       100% {
@@ -169,36 +149,24 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 620px;
-      padding: 52px 38px 40px;
+      max-width: 540px;
+      padding: 46px 34px 38px;
       text-align: center;
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
-        var(--card-bg);
+      border-radius: 22px;
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       box-shadow:
-        0 30px 80px var(--shadow-deep),
-        0 0 50px var(--shadow-soft),
-        inset 0 1px 0 var(--card-highlight);
-      animation: cardEnter 1s ease, cardFloat 7s ease-in-out infinite;
-      overflow: hidden;
+        0 24px 48px var(--shadow),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      animation: floatIn 0.9s ease, floatIdle 6s ease-in-out infinite;
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.10), transparent 30%, transparent 70%, rgba(255,255,255,0.04));
-      pointer-events: none;
-    }
-
-    @keyframes cardEnter {
+    @keyframes floatIn {
       from {
         opacity: 0;
-        transform: translateY(20px) scale(0.985);
+        transform: translateY(18px) scale(0.985);
       }
       to {
         opacity: 1;
@@ -206,105 +174,96 @@
       }
     }
 
-    @keyframes cardFloat {
+    @keyframes floatIdle {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      50% { transform: translateY(-5px); }
     }
 
-    /* Optional logo area */
+    /* Optional logo */
     .logo {
-      margin: 0 auto 20px;
+      margin: 0 auto 18px;
       display: flex;
       justify-content: center;
     }
 
     .logo img {
-      max-width: 92px;
-      max-height: 92px;
+      max-width: 84px;
+      max-height: 84px;
       width: auto;
       height: auto;
       display: block;
       object-fit: contain;
       filter:
-        drop-shadow(0 10px 22px rgba(0,0,0,0.28))
-        drop-shadow(0 0 14px rgba(255,255,255,0.10));
+        drop-shadow(0 10px 20px rgba(0,0,0,0.25))
+        drop-shadow(0 0 12px rgba(255,255,255,0.08));
     }
 
     h1 {
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
-      line-height: 1.08;
+      margin-bottom: 14px;
+      font-size: clamp(2.4rem, 4vw, 3.1rem);
+      line-height: 1.1;
       font-weight: 700;
       letter-spacing: 0.4px;
-      margin-bottom: 14px;
-      background: linear-gradient(135deg, #ffffff, #efebff, #d7d1ff);
+      background: linear-gradient(135deg, #ffffff, #ece8ff, #d9d2ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-shadow: 0 0 22px rgba(255,255,255,0.08);
     }
 
-    .subtitle {
-      max-width: 500px;
+    p {
+      max-width: 470px;
       margin: 0 auto;
-      font-size: 1.06rem;
-      line-height: 1.9;
+      font-size: 1.05rem;
+      line-height: 1.85;
       color: var(--text-soft);
-      font-weight: 400;
     }
 
-    .actions {
-      margin-top: 30px;
-    }
-
-    .privacy-link {
+    a {
       display: inline-block;
+      margin-top: 28px;
       padding: 13px 24px;
-      border-radius: 999px;
+      background: var(--button-bg);
+      color: var(--button-text);
       text-decoration: none;
+      border-radius: 999px;
       font-weight: 600;
       letter-spacing: 0.2px;
-      color: var(--button-text);
-      background: var(--button-bg);
-      box-shadow:
-        0 12px 30px rgba(0,0,0,0.22),
-        0 0 20px rgba(255,255,255,0.06);
       transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
     }
 
-    .privacy-link:hover {
+    a:hover {
       transform: translateY(-2px);
-      box-shadow:
-        0 16px 34px rgba(0,0,0,0.28),
-        0 0 24px rgba(255,255,255,0.10);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.26);
       background: #ffffff;
     }
 
     footer {
       margin-top: 26px;
       font-size: 0.92rem;
-      color: var(--text-faint);
+      color: rgba(255,255,255,0.78);
       letter-spacing: 0.2px;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 560px) {
       .card {
-        padding: 42px 24px 34px;
-        border-radius: 22px;
+        padding: 36px 24px 30px;
+        border-radius: 18px;
       }
 
       .logo img {
-        max-width: 78px;
-        max-height: 78px;
+        max-width: 72px;
+        max-height: 72px;
       }
 
-      .subtitle {
+      p {
         font-size: 1rem;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       body,
-      body::after,
+      body::before,
       .shooting-stars span,
       .card {
         animation: none !important;
@@ -317,26 +276,17 @@
     <span></span>
     <span></span>
     <span></span>
-    <span></span>
   </div>
 
   <div class="card">
-    <!-- Optional logo: remove this whole block if you don't want a logo yet -->
-    <!--
-    <div class="logo">
-      <img src="logo.png" alt="Auren logo">
-    </div>
-    -->
 
     <h1>Auren</h1>
 
-    <p class="subtitle">
+    <p>
       We design mobile apps that feel simple, helpful, and genuinely enjoyable to use — every day.
     </p>
 
-    <div class="actions">
-      <a class="privacy-link" href="privacy-policy.html">View Privacy Policy</a>
-    </div>
+    <a href="privacy-policy.html">View Privacy Policy</a>
 
     <footer>Made with care · © 2026 Auren</footer>
   </div>
