@@ -79,15 +79,63 @@
       from { opacity: 0.45; transform: scale(1); }
       to   { opacity: 0.95; transform: scale(1.02); }
     }
-    
-    <div class="shooting-stars">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-    
+
+    /* 🌠 Shooting stars */
+    .shooting-stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .shooting-stars span {
+      position: absolute;
+      top: -10%;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(-45deg, white, rgba(255,255,255,0));
+      opacity: 0.8;
+      border-radius: 50px;
+      filter: blur(0.5px);
+      animation: shooting 7s linear infinite;
+    }
+
+    .shooting-stars span:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+    }
+
+    .shooting-stars span:nth-child(2) {
+      left: 50%;
+      animation-delay: 2s;
+    }
+
+    .shooting-stars span:nth-child(3) {
+      left: 75%;
+      animation-delay: 4s;
+    }
+
+    @keyframes shooting {
+      0% {
+        transform: translateY(0) translateX(0) rotate(45deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      70% {
+        transform: translateY(600px) translateX(-300px) rotate(45deg);
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
     .card {
       position: relative;
+      z-index: 1; /* 👈 important so it's above stars */
       width: 100%;
       max-width: 620px;
       padding: 44px 34px;
@@ -96,7 +144,6 @@
       background: var(--card);
       border: 1px solid var(--card-border);
       backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
       box-shadow:
         0 20px 60px var(--shadow),
         inset 0 1px 0 rgba(255,255,255,0.22);
@@ -104,19 +151,13 @@
     }
 
     @keyframes floatIn {
-      from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes floatIdle {
       0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-6px); }
+      50% { transform: translateY(-6px); }
     }
 
     .logo-glow {
@@ -130,30 +171,20 @@
       font-weight: 700;
       background: rgba(255,255,255,0.18);
       border: 1px solid rgba(255,255,255,0.35);
-      box-shadow:
-        0 8px 30px rgba(255,255,255,0.16),
-        0 0 25px rgba(255,255,255,0.10);
     }
 
     h1 {
-      font-size: clamp(2.5rem, 4vw, 3.3rem);
+      font-size: 3rem;
       font-weight: 700;
-      letter-spacing: 0.4px;
-      margin-bottom: 12px;
       background: linear-gradient(135deg, #ffffff, #fef6ff, #e7dbff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
     .subtitle {
       margin-top: 10px;
-      font-size: 1.08rem;
       line-height: 1.9;
       color: var(--text-soft);
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .actions {
@@ -161,103 +192,30 @@
     }
 
     .privacy-link {
-      display: inline-block;
-      padding: 13px 22px;
+      padding: 12px 20px;
       border-radius: 999px;
       text-decoration: none;
       color: white;
       background: var(--privacy-bg);
-      border: 1px solid rgba(255,255,255,0.28);
-      font-weight: 600;
-      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
-    }
-
-    .privacy-link:hover {
-      background: var(--privacy-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.14);
     }
 
     footer {
       margin-top: 28px;
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.82);
-      letter-spacing: 0.2px;
+      font-size: 0.9rem;
+      opacity: 0.8;
     }
-
-    @media (max-width: 560px) {
-      .card {
-        padding: 34px 22px;
-        border-radius: 22px;
-      }
-
-      .logo-glow {
-        width: 68px;
-        height: 68px;
-        font-size: 1.7rem;
-      }
-
-      .subtitle {
-        font-size: 1rem;
-      }
-    }
-    /* 🌠 Shooting stars */
-.shooting-stars {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.shooting-stars span {
-  position: absolute;
-  top: -10%;
-  width: 2px;
-  height: 80px;
-  background: linear-gradient(-45deg, white, rgba(255,255,255,0));
-  opacity: 0.8;
-  border-radius: 50px;
-  filter: blur(0.5px);
-  animation: shooting 6s linear infinite;
-}
-
-/* different positions + delays */
-.shooting-stars span:nth-child(1) {
-  left: 20%;
-  animation-delay: 0s;
-}
-
-.shooting-stars span:nth-child(2) {
-  left: 50%;
-  animation-delay: 2s;
-}
-
-.shooting-stars span:nth-child(3) {
-  left: 75%;
-  animation-delay: 4s;
-}
-
-@keyframes shooting {
-  0% {
-    transform: translateY(0) translateX(0) rotate(45deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  70% {
-    transform: translateY(600px) translateX(-300px) rotate(45deg);
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
   </style>
 </head>
+
 <body>
+
+  <!-- ✅ THIS is where shooting stars go -->
+  <div class="shooting-stars">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
   <div class="card">
     <div class="logo-glow">A</div>
 
@@ -273,5 +231,6 @@
 
     <footer>Made with care · © 2026 Auren</footer>
   </div>
+
 </body>
 </html>
